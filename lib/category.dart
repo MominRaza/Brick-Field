@@ -18,6 +18,12 @@ List<Category> categories = [
   ),
   Category(
     'cat2',
+    'Sale',
+    Icons.arrow_drop_down,
+    '/contacts',
+  ),
+  Category(
+    'cat3',
     'Contacts',
     Icons.contacts,
     '/contacts',

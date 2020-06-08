@@ -33,9 +33,12 @@ class HomeScreen extends StatelessWidget {
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,
               childAspectRatio: 3 / 4,
+              crossAxisSpacing: 0,
+              mainAxisSpacing: 0,
             ),
             delegate: SliverChildBuilderDelegate(
               (context, index) => Card(
+                margin: EdgeInsets.all(6),
                 child: InkWell(
                   onTap: () {
                     Navigator.of(context).pushNamed(categories[index].route);

@@ -8,41 +8,50 @@ class ContactScreen extends StatelessWidget {
     final id = ModalRoute.of(context).settings.arguments;
     final contact = contacts.firstWhere((contact) => contact.id == id);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('${contact.name}, ${contact.address}'),
-        actions: <Widget>[
-          PopupMenuButton(
-            itemBuilder: (context) => [
-              PopupMenuItem(child: Text('xjhgxhj'), value: '1'),
-              PopupMenuItem(child: Text('dsfgdhg'), value: '2'),
-            ],
-            icon: Icon(Icons.more_vert),
-            onSelected: (String selectedValue) {},
-          ),
-        ],
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          ListTile(
-            leading: IconButton(icon: Icon(Icons.call), onPressed: () {}),
-            title: Text(contact.number),
-            trailing: IconButton(icon: Icon(Icons.message), onPressed: () {}),
-            onTap: () {},
-          ),
-          Divider(),
-          Text('Work'),
-          Row(
-            children: <Widget>[
-              Icon(Icons.label_outline),
-              Chip(
-                label: Text(contact.work),
-                padding: EdgeInsets.symmetric(horizontal: 10),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            title: Text('${contact.name}, ${contact.address}'),
+            actions: <Widget>[
+              PopupMenuButton(
+                itemBuilder: (context) => [
+                  PopupMenuItem(child: Text('xjhgxhj'), value: '1'),
+                  PopupMenuItem(child: Text('dsfgdhg'), value: '2'),
+                ],
+                icon: Icon(Icons.more_vert),
+                onSelected: (String selectedValue) {},
               ),
             ],
+            expandedHeight: 300,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(),
           ),
-          Divider(),
-          Text('Account'),
+          SliverList(
+            delegate: SliverChildListDelegate.fixed(
+              [
+                ListTile(
+                  leading: IconButton(icon: Icon(Icons.call), onPressed: () {}),
+                  title: Text(contact.number),
+                  trailing:
+                      IconButton(icon: Icon(Icons.message), onPressed: () {}),
+                  onTap: () {},
+                ),
+                Divider(),
+                Text('Work'),
+                Row(
+                  children: <Widget>[
+                    Icon(Icons.label_outline),
+                    Chip(
+                      label: Text(contact.work),
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                    ),
+                  ],
+                ),
+                Divider(),
+                Text('Account'),
+              ],
+            ),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
