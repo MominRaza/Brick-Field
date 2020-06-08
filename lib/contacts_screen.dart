@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'contact.dart';
 import 'sliver_app_bar_delegate.dart';
 
 class ContactsScreen extends StatelessWidget {
@@ -51,17 +52,19 @@ class ContactsScreen extends StatelessWidget {
               (context, index) => Card(
                 margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 child: ListTile(
-                  title: Text('Name, Address'),
-                  subtitle: Text('Number'),
+                  title: Text(
+                      '${contacts[index].name}, ${contacts[index].address}'),
+                  subtitle: Text(contacts[index].number),
                   leading: CircleAvatar(
                     child: Text('${index + 1}'),
                   ),
                   onTap: () {
-                    Navigator.of(context).pushNamed('/contact');
+                    Navigator.of(context)
+                        .pushNamed('/contact', arguments: contacts[index].id);
                   },
                 ),
               ),
-              childCount: 10,
+              childCount: contacts.length,
             ),
           ),
         ],

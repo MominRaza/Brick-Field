@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import './sliver_app_bar_delegate.dart';
 import './category.dart';
+import './contact.dart';
+import './daily_transaction.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -42,12 +44,15 @@ class HomeScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       CircleAvatar(
-                        child: Icon(Icons.work),
+                        child: Icon(categories[index].icon),
                       ),
                       SizedBox(
                         height: 10,
                       ),
-                      Text(categories[index].title),
+                      Text(
+                        categories[index].title,
+                        textAlign: TextAlign.center,
+                      ),
                     ],
                   ),
                 ),
@@ -80,14 +85,23 @@ class HomeScreen extends StatelessWidget {
               (context, index) => Card(
                 child: ListTile(
                   leading: CircleAvatar(
-                    child: Icon(Icons.call_received),
+                    backgroundColor:
+                        (dailyTransactiions[index].transactionType == 'Debit')
+                            ? Colors.red
+                            : Colors.green,
+                    child: Icon(
+                      (dailyTransactiions[index].transactionType == 'Debit')
+                          ? Icons.call_received
+                          : Icons.call_made,
+                    ),
                   ),
-                  title: Text('Name Work, Address'),
-                  subtitle: Text('04:57 AM'),
-                  trailing: Text('\$ 300'),
+                  title: Text(
+                      '${contacts.firstWhere((contact) => contact.id == dailyTransactiions[index].userId).name}, ${contacts.firstWhere((contact) => contact.id == dailyTransactiions[index].userId).address}'),
+                  subtitle: Text(dailyTransactiions[index].timeDate),
+                  trailing: Text('\$ ${dailyTransactiions[index].amount}'),
                 ),
               ),
-              childCount: 10,
+              childCount: dailyTransactiions.length,
             ),
           ),
         ],

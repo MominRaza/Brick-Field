@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AddDailyTransaction extends StatelessWidget {
+class AddDailyTransactionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

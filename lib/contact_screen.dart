@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
+import 'contact.dart';
+
 class ContactScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final id = ModalRoute.of(context).settings.arguments;
+    final contact = contacts.firstWhere((contact) => contact.id == id);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Name, Address'),
+        title: Text('${contact.name}, ${contact.address}'),
         actions: <Widget>[
           PopupMenuButton(
             itemBuilder: (context) => [
@@ -22,7 +26,7 @@ class ContactScreen extends StatelessWidget {
         children: <Widget>[
           ListTile(
             leading: IconButton(icon: Icon(Icons.call), onPressed: () {}),
-            title: Text('Number'),
+            title: Text(contact.number),
             trailing: IconButton(icon: Icon(Icons.message), onPressed: () {}),
             onTap: () {},
           ),
@@ -32,7 +36,7 @@ class ContactScreen extends StatelessWidget {
             children: <Widget>[
               Icon(Icons.label_outline),
               Chip(
-                label: Text('Work'),
+                label: Text(contact.work),
                 padding: EdgeInsets.symmetric(horizontal: 10),
               ),
             ],
